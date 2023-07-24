@@ -1,0 +1,158 @@
+{
+	"info": {
+		"_postman_id": "8fe9a7df-dc36-4a3a-bd1e-e858ead9bf1b",
+		"name": "Banking",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20972318"
+	},
+	"item": [
+		{
+			"name": "[POST] /customer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Daniel Freitas Martins\",\n    \"email\": \"mdanielfm97@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/customer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"customer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[POST] /account",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"customerId\": \"1\",\n    \"country\": \"Sweden\",\n    \"currencyTypes\": [\"EUR\", \"SEK\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/account",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"account"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[GET] /account",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"customerId\": \"1\",\n    \"country\": \"Sweden\",\n    \"currencyTypes\": [\"EUR\", \"SEK\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/account/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"account",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[POST] /transaction",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"accountId\": 1,\n    \"amount\": 500,\n    \"currencyType\": \"EUR\",\n    \"transactionDirection\": \"IN\",\n    \"description\": \"Adding 500 euros\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/transaction",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"transaction"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[GET] /transaction",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/transaction/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"transaction",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

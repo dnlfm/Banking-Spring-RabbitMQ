@@ -1,0 +1,42 @@
+version: "3.9"
+
+services:
+
+  db:
+    image: postgres:latest
+    container_name: banking_postgres_container
+    environment:
+      POSTGRES_DB: ${BANKING_POSTGRES_DB:-banking}
+      POSTGRES_USER: ${BANKING_POSTGRES_USER:-dnlfm}
+      POSTGRES_PASSWORD: ${BANKING_POSTGRES_PASSWORD:-123}
+    ports:
+      - "5432:5432"
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: banking_rabbitmq_container
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  app:
+    image: banking_main_image
+    container_name: banking_main_container
+    build:
+      context: ${BANKING_RELATIVE_DIR:-./}
+      dockerfile: Dockerfile
+      args:
+        - BANKING_RELATIVE_DIR=/usr/banking
+        - IS_DEVELOPMENT_MODE=true
+    ports:
+      - "8080:8080"
+    volumes:
+      - ${BANKING_RELATIVE_DIR:-./}:/usr/banking
+    depends_on:
+      - db
+      - rabbitmq
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/${BANKING_POSTGRES_DB:-banking}
+      SPRING_DATASOURCE_USERNAME: ${BANKING_POSTGRES_USER:-dnlfm}
+      SPRING_DATASOURCE_PASSWORD: ${BANKING_POSTGRES_PASSWORD:-123}
+      SPRING_RABBITMQ_HOST: rabbitmq
