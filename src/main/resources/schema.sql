@@ -75,6 +75,8 @@ BEGIN
   RETURN NEW;
 END$$ language plpgsql;
 
+DROP TRIGGER IF EXISTS update_balance_trigger
+  ON banking.transaction;
 CREATE TRIGGER update_balance_trigger
 BEFORE INSERT ON banking.transaction
 FOR EACH ROW
